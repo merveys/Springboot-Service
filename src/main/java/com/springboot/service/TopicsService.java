@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.springboot.model.Topic;
+
 @Component
-@Service
 public class TopicsService {
 	private List<Topic> topicList = new ArrayList<>(Arrays.asList(
 
@@ -27,4 +27,11 @@ public class TopicsService {
 	public Topic getTopic(String id) {
 		return topicList.stream().filter(topic -> topic.getId().equals(id)).findFirst().get();
 	}
+	
+	public boolean delete(String id) {
+		var isRemoved = this.topicList.removeIf(Topic -> Topic.getId().equals(id));
+		
+		return isRemoved;
+	}
+	
 }
